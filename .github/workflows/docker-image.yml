@@ -20,7 +20,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Build the Docker image
-      - env: 
+        env: 
           secretkey: ${{ secrets.SECRET_KEY }}
         run: docker build . --file GitHubSecretExample/Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/githubsecretsexample
 
