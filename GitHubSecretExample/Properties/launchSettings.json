@@ -29,6 +29,9 @@
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "environmentVariables": {
+        "MY_SECRET_KEY": "Gencaydo"
+      },
       "publishAllPorts": true,
       "useSSL": true
     }
