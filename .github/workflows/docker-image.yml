@@ -20,7 +20,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Variable Substitution appsettings file for tests
-      - uses: microsoft/variable-substitution@v1
+        uses: microsoft/variable-substitution@v1
         with:
          files: 'GitHubSecretExample/appsettings.json'
         env:
