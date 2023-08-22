@@ -6,8 +6,6 @@ EXPOSE 5024
 
 COPY . ./
 
-ENV MY_SECRET_KEY = ${MY_SECRET_KEY}
-
 RUN dotnet restore
 RUN dotnet publish -c Release -o out
 
