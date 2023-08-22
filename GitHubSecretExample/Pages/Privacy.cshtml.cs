@@ -15,7 +15,7 @@ namespace GitHubSecretExample.Pages
 
         public void OnGet()
         {
-            secretkey = Environment.GetEnvironmentVariable("secretkey");
+            secretkey = Environment.GetEnvironmentVariable("MY_SECRET_KEY");
         }
     }
 }
