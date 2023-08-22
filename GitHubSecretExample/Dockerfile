@@ -12,6 +12,4 @@ FROM mcr.microsoft.com/dotnet/aspnet:7.0
 WORKDIR /App
 COPY --from=build-env /App/out .
 
-ENV MY_SECRET_KEY = ${MY_SECRET_KEY}
-
 ENTRYPOINT ["dotnet", "GitHubSecretExample.dll"]
