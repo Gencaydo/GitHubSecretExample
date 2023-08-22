@@ -15,4 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file GitHubSecretExample/Dockerfile --tag my-image-name:$(date +%s)
+      run: echo $ {{ secrets.SECRET_KEY }}
+           docker build . --file GitHubSecretExample/Dockerfile --tag my-image-name:$(date +%s)
+           
