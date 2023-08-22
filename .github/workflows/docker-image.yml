@@ -19,8 +19,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
+      - name: Variable Substitution appsettings file for tests
+      - uses: microsoft/variable-substitution@v1
+        with:
+         files: 'GitHubSecretExample/appsettings.json'
+        env:
+           AppSettings.ClientSecret: "${{ secrets.SECRET_KEY }}"
+           
       - name: Build the Docker image     
         run: docker build . --file GitHubSecretExample/Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/githubsecretsexample
+        
 
       - name: Docker Push
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/githubsecretsexample
