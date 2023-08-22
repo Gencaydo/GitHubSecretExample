@@ -6,6 +6,7 @@ namespace GitHubSecretExample.Pages
     public class PrivacyModel : PageModel
     {
         private readonly ILogger<PrivacyModel> _logger;
+        public string? secretkey { get; set; }
 
         public PrivacyModel(ILogger<PrivacyModel> logger)
         {
@@ -14,6 +15,7 @@ namespace GitHubSecretExample.Pages
 
         public void OnGet()
         {
+            secretkey = Environment.GetEnvironmentVariable("secretkey");
         }
     }
 }

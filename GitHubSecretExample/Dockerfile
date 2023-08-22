@@ -1,22 +1,15 @@
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
+WORKDIR /App
 
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
-WORKDIR /app
 EXPOSE 80
-EXPOSE 443
+EXPOSE 5024
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-WORKDIR /src
-COPY ["GitHubSecretExample/GitHubSecretExample.csproj", "GitHubSecretExample/"]
-RUN dotnet restore "GitHubSecretExample/GitHubSecretExample.csproj"
-COPY . .
-WORKDIR "/src/GitHubSecretExample"
-RUN dotnet build "GitHubSecretExample.csproj" -c Release -o /app/build
+COPY . ./
+RUN dotnet restore
+RUN dotnet publish -c Release -o out
 
-FROM build AS publish
-RUN dotnet publish "GitHubSecretExample.csproj" -c Release -o /app/publish /p:UseAppHost=false
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
+WORKDIR /App
+COPY --from=build-env /App/out .
 
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "GitHubSecretExample.dll"]
