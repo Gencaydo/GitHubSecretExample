@@ -13,10 +13,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
     - name: Build the Docker image
+      run: docker build --file GitHubSecretExample/Dockerfile -t app .
+    - uses: secrethub/pushimage@v3
+    - name: Publish Docker image
       run: |
-           docker build --file GitHubSecretExample/Dockerfile -t app .
-           echo ${{ secrets.DOCKER_HUB_USER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_HUB_USER_NAME }} --stdin-password
-           docker tag app gencaydo/githubsecretexample
-           docker push gencaydo/githubsecretexample
+          echo ${{ secrets.DOCKER_HUB_USER_NAME }} | docker login -u ${{ secrets.DOCKER_HUB_USER_PASSWORD }} --password-stdin
+          docker push gencaydo/githubsecretexample
