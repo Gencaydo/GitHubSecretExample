@@ -30,7 +30,7 @@
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "environmentVariables": {
-        "MY_SECRET_KEY": ""
+        "MY_SECRET_KEY": "{MY_SECRET_KEY}"
       },
       "publishAllPorts": true,
       "useSSL": true
